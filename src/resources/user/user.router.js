@@ -12,3 +12,5 @@ router
 	.get(controller.getOne)
 	.put(controller.update)
 	.delete(controller.remove);
+
+module.exports = router;
