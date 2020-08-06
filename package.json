@@ -1,0 +1,19 @@
+{
+  "name": "target-myretail-restful-service",
+  "version": "1.0.0",
+  "description": "A case study challenge for Target's hiring process",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MosesSupposes/Target-myRetail-RESTful-service.git"
+  },
+  "author": "Moses A.Samuel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MosesSupposes/Target-myRetail-RESTful-service/issues"
+  },
+  "homepage": "https://github.com/MosesSupposes/Target-myRetail-RESTful-service#readme"
+}
