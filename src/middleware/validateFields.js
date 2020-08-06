@@ -1,6 +1,6 @@
 const validateFieldsShallowly = fields => (req, res, next) => {
 	const allFieldsAreValid = fields.every(field =>
-		eval("req.body." + field + " !== undefined")
+		eval(`req.body.${field} !== undefined`)
 	);
 
 	if (allFieldsAreValid) {
