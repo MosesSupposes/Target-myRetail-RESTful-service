@@ -23,6 +23,10 @@ server.use(morgan("dev"));
 server.use("/api/products", productsRouter);
 server.use("/api/users", usersRouter);
 
+server.get("/", function ping(req, res) {
+	res.status(200).json({ api: "running" });
+});
+
 server.use(function notFound(req, res, next) {
 	const error = new Error("Resource not found.");
 	error.status = 404;
