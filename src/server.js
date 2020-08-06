@@ -47,6 +47,7 @@ server.use(function errorHandler(error, req, res, next) {
 
 const start = async ({ dbUrl, port = 3000 }) => {
 	try {
+		mongoose.set("useCreateIndex", true);
 		await mongoose.connect(dbUrl, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
