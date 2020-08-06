@@ -58,7 +58,7 @@ const getOne = (req, res, next) => {
 		})
 		.catch(function onReject(error) {
 			console.error(error);
-			res.status(400).end(); // Bad request
+			res.status(400).end();
 		});
 };
 
@@ -73,7 +73,20 @@ const create = (req, res) => {
 		});
 };
 
-const update = async (req, res) => {};
+const update = (req, res) => {
+	Product.findOneAndUpdate({ productId: req.params.id }, req.body, {
+		new: true,
+	})
+		.lean()
+		.exec()
+		.then(updatedProduct => {
+			res.status(200).json({ data: updatedProduct });
+		})
+		.catch(error => {
+			console.error(error);
+			res.status(400).end();
+		});
+};
 
 const remove = async (req, res) => {};
 
