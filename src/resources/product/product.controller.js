@@ -21,25 +21,38 @@ const getMany = (req, res) => {
 			res.status(400).end();
 		});
 };
-const getOne = (req, res) => {
+const getOne = (req, res, next) => {
 	axios
 		.get(
 			`https://redsky.target.com/v3/pdp/tcin/${req.params.id}?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics&key=candidate`
 		)
 		.then(async function onResolve(response) {
-			const existingCopyOfProduct = await Product.findOne({
-				productId: req.params.id,
-			})
-				.lean()
-				.exec();
-
-			if (existingCopyOfProduct) {
-				res.status(200).json({ data: existingCopyOfProduct });
-			} else {
-				const newCopyOfProdcut = await Product.create(
-					parseToProductSchema(response)
+			try {
+				// Lookup the product in our copy of the database.
+				const existingCopyOfProduct = await Product.findOne({
+					productId: req.params.id,
+				})
+					.lean()
+					.exec();
+				// If it exists, send it in the response
+				if (existingCopyOfProduct) {
+					res.status(200).json({ data: existingCopyOfProduct });
+				} else {
+					// Otherwise, copy the requested resource into our copy of the database, then respond with the result.
+					const newCopyOfProdcut = await Product.create(
+						parseToProductSchema(response)
+					);
+					res.status(200).json({ data: newCopyOfProdcut });
+				}
+			} catch (error) {
+				// If there was a problem either querying the copy of the product or inserting a new copy into the db...
+				console.error(error);
+				const serverError = new Error(
+					"There was a problem querying your request."
 				);
-				res.status(200).json({ data: newCopyOfProdcut });
+				serverError.status = 500;
+				// propogate the error to the next error handler
+				next(serverError);
 			}
 		})
 		.catch(function onReject(error) {
