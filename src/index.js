@@ -5,6 +5,6 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 server.start({
-	dbUrl: "mongodb+srv://cluster0.4kxos.mongodb.net/myRetail",
+	dbUrl: process.env.DB_URL,
 	port: process.env.PORT,
 });
