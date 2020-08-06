@@ -1,33 +1,34 @@
 {
-  "name": "target-myretail-restful-service",
-  "version": "1.0.0",
-  "description": "A case study challenge for Target's hiring process",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MosesSupposes/Target-myRetail-RESTful-service.git"
-  },
-  "author": "Moses A.Samuel",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MosesSupposes/Target-myRetail-RESTful-service/issues"
-  },
-  "homepage": "https://github.com/MosesSupposes/Target-myRetail-RESTful-service#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.27",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "jest": "^26.2.2",
-    "nodemon": "^2.0.4",
-    "supertest": "^4.0.2"
-  }
+	"name": "target-myretail-restful-service",
+	"version": "1.0.0",
+	"description": "A case study challenge for Target's hiring process",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest",
+		"dev": "nodemon src/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MosesSupposes/Target-myRetail-RESTful-service.git"
+	},
+	"author": "Moses A.Samuel",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/MosesSupposes/Target-myRetail-RESTful-service/issues"
+	},
+	"homepage": "https://github.com/MosesSupposes/Target-myRetail-RESTful-service#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.9.27",
+		"morgan": "^1.10.0"
+	},
+	"devDependencies": {
+		"jest": "^26.2.2",
+		"nodemon": "^2.0.4",
+		"supertest": "^4.0.2"
+	}
 }
