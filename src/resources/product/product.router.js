@@ -1,10 +1,22 @@
 const { Router } = require("express");
 const controller = require("./product.controller");
+const { validateFieldsShallowly } = require("../../middleware/validateFields");
 
 const router = Router();
 
 // /api/products
-router.route("/").get(controller.getMany).post(controller.create);
+router
+	.route("/")
+	.get(controller.getMany)
+	.post(
+		validateFieldsShallowly([
+			"productId",
+			"name",
+			"productDescription",
+			"buyUrl",
+		]),
+		controller.create
+	);
 
 // /api/products/:id
 router
