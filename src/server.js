@@ -7,6 +7,9 @@ const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const productsRouter = require("./resources/product/product.router");
+const usersRouter = require("./resources/user/user.router");
+
 const server = express();
 
 /**
@@ -16,6 +19,9 @@ const server = express();
 server.use(cors());
 server.use(json());
 server.use(morgan("dev"));
+
+server.use("/api/products", productsRouter);
+server.use("/api/users", usersRouter);
 
 server.use(function notFound(req, res, next) {
 	const error = new Error("Resource not found.");
