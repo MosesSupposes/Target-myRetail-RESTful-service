@@ -9,8 +9,8 @@ const productSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	currentPrice: {
-		type: { value: Number, curreny_code: String },
+	buyUrl: {
+		type: String,
 		required: true,
 	},
 });
