@@ -51,7 +51,7 @@ const start = async ({ dbUrl, port = 3000 }) => {
 			console.log(`Server listening on port ${port} 🚀`);
 		});
 	} catch (error) {
-		console.error("Connection error", error);
+		console.error("Connection error:", error);
 	}
 };
 
