@@ -21,6 +21,7 @@ const getMany = (req, res) => {
 			res.status(400).end();
 		});
 };
+
 const getOne = (req, res, next) => {
 	axios
 		.get(
@@ -60,8 +61,20 @@ const getOne = (req, res, next) => {
 			res.status(400).end(); // Bad request
 		});
 };
-const create = async (req, res) => {};
+
+const create = (req, res) => {
+	Product.create(req.body)
+		.then(newProduct => {
+			res.status(201).json({ data: newProduct });
+		})
+		.catch(error => {
+			console.error(error);
+			res.status(400).end();
+		});
+};
+
 const update = async (req, res) => {};
+
 const remove = async (req, res) => {};
 
 /**
