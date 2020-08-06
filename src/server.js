@@ -55,6 +55,10 @@ const start = async ({ dbUrl, port = 3000 }) => {
 	}
 };
 
+/**
+ * Exports
+ */
+
 module.exports = {
 	server,
 	start,
