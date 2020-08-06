@@ -88,7 +88,22 @@ const update = (req, res) => {
 		});
 };
 
-const remove = async (req, res) => {};
+const remove = async (req, res) => {
+	try {
+		const removedProduct = await Product.findOneAndRemove({
+			productId: req.params.id,
+		});
+
+		if (!removedProduct) {
+			return res.status(400).end();
+		}
+
+		return res.status(200).json({ data: removedProduct });
+	} catch (error) {
+		console.error(error);
+		res.status(400).end();
+	}
+};
 
 /**
  * Helpers
