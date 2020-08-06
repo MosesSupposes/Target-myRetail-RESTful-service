@@ -9,7 +9,18 @@ const { Product } = require("./product.model");
  * Controllers
  */
 
-const getMany = async (req, res) => {};
+const getMany = (req, res) => {
+	Product.find()
+		.lean()
+		.exec()
+		.then(products => {
+			res.status(200).json({ data: products });
+		})
+		.catch(error => {
+			console.error(error);
+			res.status(400).end();
+		});
+};
 const getOne = (req, res) => {
 	axios
 		.get(
