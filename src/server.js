@@ -35,14 +35,14 @@ server.use(function errorHandler(error, req, res, next) {
  * Start the server
  */
 
-const start = async () => {
+const start = async ({ dbUrl, port = 3000 }) => {
 	try {
-		await mongoose.connect(
-			"mongodb+srv://cluster0.4kxos.mongodb.net/myRetail",
-			{ useNewUrlParser: true, useUnifiedTopology: true }
-		);
-		server.listen(process.env.PORT || 3000, () => {
-			console.log("Server listening on port 3000 🚀");
+		await mongoose.connect(dbUrl, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
+		server.listen(port, () => {
+			console.log(`Server listening on port ${port} 🚀`);
 		});
 	} catch (error) {
 		console.error("Connection error", error);
