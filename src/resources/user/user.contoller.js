@@ -1,5 +1,6 @@
 const { User } = require("./user.model");
 const bcrypt = require("bcrypt");
+const { omit } = require("../../utils");
 const jwtSecret = process.env.JWT_SECRET;
 
 const getMany = (req, res) => {};
@@ -14,7 +15,8 @@ const register = (req, res, next) => {
 		} else {
 			User.create({ ...req.body, password: encryptedPassword })
 				.then(newUser => {
-					res.status(200).json({ data: newUser });
+					const newUserWithoutPassword = omit(["password"], newUser._doc);
+					res.status(200).json({ data: newUserWithoutPassword });
 				})
 				.catch(err => {
 					console.error(err);
