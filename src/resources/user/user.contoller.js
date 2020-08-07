@@ -17,7 +17,14 @@ const register = (req, res, next) => {
 			User.create({ ...req.body, password: encryptedPassword })
 				.then(newUser => {
 					const newUserWithoutPassword = omit(["password"], newUser._doc);
-					res.status(200).json({ data: newUserWithoutPassword });
+					res
+						.status(200)
+						.json({
+							data: {
+								...newUserWithoutPassword,
+								token: generateToken(newUserWithoutPassword),
+							},
+						});
 				})
 				.catch(err => {
 					console.error(err);
@@ -43,9 +50,11 @@ const login = async (req, res, next) => {
 			} else {
 				const userWithoutPassword = omit(["password"], user);
 				res.status(200).json({
-					success: `Welcome ${user.fullName}!`,
-					userWithoutPassword,
-					token: generateToken(user),
+					data: {
+						success: `Welcome ${user.fullName}!`,
+						userWithoutPassword,
+						token: generateToken(user),
+					},
 				});
 			}
 		});
