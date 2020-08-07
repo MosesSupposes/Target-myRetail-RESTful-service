@@ -5,13 +5,17 @@ const { validateFieldsShallowly } = require("../../middleware/validateFields");
 const router = Router();
 
 // /api/users
-router
-	.route("/")
-	.get(controller.getMany)
-	.post(
-		validateFieldsShallowly(["fullName", "email", "password"]),
-		controller.create
-	);
+router.get("/", controller.getMany);
+
+// /api/users/register
+router.post(
+	"/register",
+	validateFieldsShallowly(["fullName", "email", "password"]),
+	controller.register
+);
+
+// /api/users/login
+router.post("/login", controller.login);
 
 // /api/users/:id
 router
