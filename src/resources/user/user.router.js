@@ -24,7 +24,11 @@ router.post(
 );
 
 // /api/users/login
-router.post("/login", controller.login);
+router.post(
+	"/login",
+	validateFieldsShallowly(["email", "password"]),
+	controller.login
+);
 
 // /api/users/:id
 router
