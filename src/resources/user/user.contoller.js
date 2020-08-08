@@ -67,7 +67,7 @@ const register = (req, res, next) => {
 
 const login = async (req, res, next) => {
 	const [err, user] = await withCatch(
-		User.findOne({ _id: req.body.id }).lean().exec()
+		User.findOne({ email: req.body.email }).lean().exec()
 	);
 
 	if (err || !user) {
