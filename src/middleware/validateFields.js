@@ -22,6 +22,4 @@ const validateFieldsShallowly = fields => (req, res, next) => {
  * Exports
  */
 
-module.exports = {
-	validateFieldsShallowly,
-};
+module.exports = validateFieldsShallowly;

@@ -4,7 +4,7 @@
 
 const { Router } = require("express");
 const controller = require("./product.controller");
-const { validateFieldsShallowly } = require("../../middleware/validateFields");
+const validateFieldsShallowly = require("../../middleware/validateFields");
 
 const router = Router();
 
