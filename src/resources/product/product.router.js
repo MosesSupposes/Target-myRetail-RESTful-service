@@ -5,12 +5,15 @@
 const { Router } = require("express");
 const controller = require("./product.controller");
 const validateFieldsShallowly = require("../../middleware/validateFields");
+const authenticate = require("../../middleware/authenticate");
 
 const router = Router();
 
 /**
  * Create Routes
  */
+
+router.use(authenticate); // Require a json web token for access to each endpoint on this router.
 
 // /api/products
 router

@@ -5,6 +5,7 @@
 const { Router } = require("express");
 const controller = require("./user.contoller");
 const validateFieldsShallowly = require("../../middleware/validateFields");
+const authenticate = require("../../middleware/authenticate");
 
 const router = Router();
 
@@ -13,7 +14,7 @@ const router = Router();
  */
 
 // /api/users
-router.get("/", controller.getMany);
+router.get("/", authenticate, controller.getMany);
 
 // /api/users/register
 router.post(
@@ -28,6 +29,7 @@ router.post("/login", controller.login);
 // /api/users/:id
 router
 	.route("/:id")
+	.all(authenticate)
 	.get(controller.getOne)
 	.put(controller.update)
 	.delete(controller.remove);
