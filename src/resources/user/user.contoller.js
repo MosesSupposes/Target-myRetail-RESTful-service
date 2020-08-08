@@ -81,7 +81,20 @@ const login = async (req, res, next) => {
 	}
 };
 
-const update = (req, res) => {};
+const update = async (req, res) => {
+	const [err, updatedUser] = await withCatch(
+		User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+			.lean()
+			.exec()
+	);
+
+	if (err || !updatedUser) {
+		res.status(400).end();
+	} else {
+		const updatedUserWithoutPassword = omit(["password"], updatedUser);
+		res.status(200).json({ data: updatedUserWithoutPassword });
+	}
+};
 
 const remove = (req, res) => {};
 
