@@ -83,7 +83,7 @@ const login = async (req, res, next) => {
 				res.status(200).json({
 					data: {
 						success: `Welcome ${user.fullName}!`,
-						userWithoutPassword,
+						...userWithoutPassword,
 						token: generateToken(user),
 					},
 				});
@@ -93,13 +93,29 @@ const login = async (req, res, next) => {
 };
 
 const update = async (req, res) => {
-	const [err, updatedUser] = await withCatch(
-		User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-			.lean()
-			.exec()
-	);
+	// If the user wants to update their password, hash it before saving it to the database.
+	if (Object.keys(req.body).includes("password")) {
+		var encryptedPassword = bcrypt.hashSync(req.body.password, 8);
+		// I'm intentionally using `var` here since the following two variables need to be accessed outside of the scope of this block
+		var [err, updatedUser] = await withCatch(
+			User.findOneAndUpdate(
+				{ _id: req.params.id },
+				{ ...req.body, password: encryptedPassword },
+				{ new: true }
+			)
+				.lean()
+				.exec()
+		);
+	} else {
+		var [err, updatedUser] = await withCatch(
+			User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+				.lean()
+				.exec()
+		);
+	}
 
 	if (err || !updatedUser) {
+		console.log("err:", err, "updatedUser:", updatedUser);
 		res.status(400).end();
 	} else {
 		const updatedUserWithoutPassword = omit(["password"], updatedUser);
