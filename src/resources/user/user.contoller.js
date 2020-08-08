@@ -95,7 +95,7 @@ const login = async (req, res, next) => {
 const update = async (req, res) => {
 	// If the user wants to update their password, hash it before saving it to the database.
 	if (Object.keys(req.body).includes("password")) {
-		var encryptedPassword = bcrypt.hashSync(req.body.password, 8);
+		let encryptedPassword = bcrypt.hashSync(req.body.password, 8);
 		// I'm intentionally using `var` here since the following two variables need to be accessed outside of the scope of this block
 		var [err, updatedUser] = await withCatch(
 			User.findOneAndUpdate(
