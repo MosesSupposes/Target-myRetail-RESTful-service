@@ -4,9 +4,31 @@ const { omit, withCatch } = require("../../utils");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET || "this is not secret";
 
-const getMany = (req, res) => {};
+const getMany = (req, res) => {
+	User.find()
+		.lean()
+		.exec()
+		.then(allUsers => {
+			res.status(200).json({ data: allUsers });
+		})
+		.catch(error => {
+			console.error(error);
+			res.status(400).end();
+		});
+};
 
-const getOne = (req, res) => {};
+const getOne = (req, res) => {
+	User.findOne({ _id: req.params.id })
+		.lean()
+		.exec()
+		.then(foundUser => {
+			res.status(200).json({ data: foundUser });
+		})
+		.catch(error => {
+			console.error(error);
+			res.status(400).end();
+		});
+};
 
 const register = (req, res, next) => {
 	bcrypt.hash(req.body.password, 8, async (err, encryptedPassword) => {
@@ -17,14 +39,12 @@ const register = (req, res, next) => {
 			User.create({ ...req.body, password: encryptedPassword })
 				.then(newUser => {
 					const newUserWithoutPassword = omit(["password"], newUser._doc);
-					res
-						.status(200)
-						.json({
-							data: {
-								...newUserWithoutPassword,
-								token: generateToken(newUserWithoutPassword),
-							},
-						});
+					res.status(200).json({
+						data: {
+							...newUserWithoutPassword,
+							token: generateToken(newUserWithoutPassword),
+						},
+					});
 				})
 				.catch(err => {
 					console.error(err);
