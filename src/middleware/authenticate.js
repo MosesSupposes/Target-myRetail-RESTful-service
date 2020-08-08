@@ -28,7 +28,7 @@ const authenticate = (req, res, next) => {
 		});
 	} else {
 		const error = new Error(
-			"You need a token tto access this resource. Obtain one by logging in or registering an account."
+			"You need a token to access this resource. Obtain one by logging in or registering an account."
 		);
 		error.stattus = 400;
 		next(error);
