@@ -1,4 +1,11 @@
+/**
+ * Imports
+ */
 const mongoose = require("mongoose");
+
+/**
+ * Define Schema
+ */
 
 const productSchema = new mongoose.Schema({
 	productId: {
@@ -19,6 +26,10 @@ const productSchema = new mongoose.Schema({
 		required: true,
 	},
 });
+
+/**
+ * Exports
+ */
 
 module.exports = {
 	Product: mongoose.model("products", productSchema),

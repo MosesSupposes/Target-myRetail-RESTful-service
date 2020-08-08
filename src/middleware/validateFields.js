@@ -1,3 +1,7 @@
+/**
+ * Define Middleware
+ */
+
 const validateFieldsShallowly = fields => (req, res, next) => {
 	const allFieldsAreValid = fields.every(field =>
 		eval(`req.body.${field} !== undefined`)
@@ -13,6 +17,10 @@ const validateFieldsShallowly = fields => (req, res, next) => {
 		next(error);
 	}
 };
+
+/**
+ * Exports
+ */
 
 module.exports = {
 	validateFieldsShallowly,

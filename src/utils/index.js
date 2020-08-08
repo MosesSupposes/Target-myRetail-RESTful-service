@@ -25,6 +25,10 @@ const omit = (fields, obj) => {
 	return newObj;
 };
 
+/**
+ * Exports
+ */
+
 module.exports = {
 	withCatch,
 	catchErrors,

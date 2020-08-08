@@ -1,8 +1,16 @@
+/**
+ * Imports
+ */
+
 const { Router } = require("express");
 const controller = require("./user.contoller");
 const { validateFieldsShallowly } = require("../../middleware/validateFields");
 
 const router = Router();
+
+/**
+ * Create Routes
+ */
 
 // /api/users
 router.get("/", controller.getMany);
@@ -23,5 +31,9 @@ router
 	.get(controller.getOne)
 	.put(controller.update)
 	.delete(controller.remove);
+
+/**
+ * Exports
+ */
 
 module.exports = router;

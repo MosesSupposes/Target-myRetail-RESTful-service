@@ -1,4 +1,12 @@
+/**
+ * Imports
+ */
+
 const mongoose = require("mongoose");
+
+/**
+ * Define Schema
+ */
 
 const userSchema = new mongoose.Schema({
 	fullName: {
@@ -15,6 +23,10 @@ const userSchema = new mongoose.Schema({
 		required: true,
 	},
 });
+
+/**
+ * Exports
+ */
 
 module.exports = {
 	User: mongoose.model("users", userSchema),

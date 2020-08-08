@@ -1,8 +1,15 @@
+/**
+ * Imports
+ */
 const { User } = require("./user.model");
 const bcrypt = require("bcrypt");
 const { omit, withCatch } = require("../../utils");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET || "this is not secret";
+
+/**
+ * Controllers
+ */
 
 const getMany = (req, res) => {
 	User.find()
@@ -126,6 +133,10 @@ function generateToken(user) {
 	const options = { expiresIn: "3h" };
 	return jwt.sign(payload, jwtSecret, options);
 }
+
+/**
+ * Exports
+ */
 
 module.exports = {
 	getMany,
