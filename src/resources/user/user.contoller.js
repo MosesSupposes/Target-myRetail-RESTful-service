@@ -115,7 +115,6 @@ const update = async (req, res) => {
 	}
 
 	if (err || !updatedUser) {
-		console.log("err:", err, "updatedUser:", updatedUser);
 		res.status(400).end();
 	} else {
 		const updatedUserWithoutPassword = omit(["password"], updatedUser);
