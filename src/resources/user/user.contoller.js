@@ -123,7 +123,6 @@ const update = async (req, res) => {
 };
 
 const remove = async (req, res) => {
-	// We don't have to bother with removing the password from the response because we're destroying the resource.
 	const [err, removedUser] = await withCatch(
 		User.findOneAndRemove({ _id: req.params.id })
 	);
@@ -131,6 +130,7 @@ const remove = async (req, res) => {
 	if (err || !removedUser) {
 		res.status(400).end();
 	} else {
+		// We don't have to bother with removing the password from the response because we're destroying the resource.
 		res.status(200).json({ data: removedUser });
 	}
 };
