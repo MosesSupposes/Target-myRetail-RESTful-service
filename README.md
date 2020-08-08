@@ -14,7 +14,7 @@ Now, to run the API, run the following command in your terminal:
 
 `npm start`
 
-You should now have the API running on localhost 3000.
+You should now have the API running on [http://localhost:3000](http://localhost:3000).
 
 **Note**: _You need to set up environment variables -- which are sort of like private keys -- in order for this project to work properly. For instance, you won't be able to connect to the database without them. Ask me for them and I will be happy to provide them for you._
 
