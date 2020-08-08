@@ -9,7 +9,10 @@ const getMany = (req, res) => {
 		.lean()
 		.exec()
 		.then(allUsers => {
-			res.status(200).json({ data: allUsers });
+			const allUsersWithoutPasswords = allUsers.map(user =>
+				omit(["password"], user)
+			);
+			res.status(200).json({ data: allUsersWithoutPasswords });
 		})
 		.catch(error => {
 			console.error(error);
@@ -22,7 +25,8 @@ const getOne = (req, res) => {
 		.lean()
 		.exec()
 		.then(foundUser => {
-			res.status(200).json({ data: foundUser });
+			const { password, ...foundUserWithoutPassword } = foundUser;
+			res.status(200).json({ data: foundUserWithoutPassword });
 		})
 		.catch(error => {
 			console.error(error);
