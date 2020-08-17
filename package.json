@@ -4,7 +4,7 @@
 	"description": "A case study challenge for Target's hiring process",
 	"main": "index.js",
 	"scripts": {
-		"test": "jest",
+		"test": "jest -w",
 		"dev": "nodemon src/index.js",
 		"start": "node src/index.js"
 	},
